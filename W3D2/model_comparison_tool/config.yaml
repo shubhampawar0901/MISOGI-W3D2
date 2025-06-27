@@ -1,0 +1,96 @@
+# Model Comparison Tool Configuration
+
+# Model Providers Configuration
+providers:
+  openai:
+    base_models:
+      - name: "gpt-4-base"
+        description: "GPT-4 base model without instruction tuning"
+        context_window: 8192
+        available: false  # Base models not publicly available
+    instruct_models:
+      - name: "gpt-4"
+        description: "GPT-4 with instruction following capabilities"
+        context_window: 8192
+        available: true
+      - name: "gpt-3.5-turbo"
+        description: "GPT-3.5 Turbo with instruction following"
+        context_window: 4096
+        available: true
+    fine_tuned_models:
+      - name: "gpt-3.5-turbo-fine-tuned"
+        description: "Fine-tuned GPT-3.5 Turbo (user-specific)"
+        context_window: 4096
+        available: false  # Requires user's fine-tuned model
+
+  anthropic:
+    base_models:
+      - name: "claude-3-base"
+        description: "Claude-3 base model"
+        context_window: 200000
+        available: false  # Base models not publicly available
+    instruct_models:
+      - name: "claude-3-opus-20240229"
+        description: "Claude-3 Opus with instruction following"
+        context_window: 200000
+        available: true
+      - name: "claude-3-sonnet-20240229"
+        description: "Claude-3 Sonnet with instruction following"
+        context_window: 200000
+        available: true
+      - name: "claude-3-haiku-20240307"
+        description: "Claude-3 Haiku with instruction following"
+        context_window: 200000
+        available: true
+    fine_tuned_models:
+      - name: "claude-fine-tuned"
+        description: "Fine-tuned Claude model (user-specific)"
+        context_window: 200000
+        available: false
+
+  huggingface:
+    base_models:
+      - name: "microsoft/DialoGPT-large"
+        description: "DialoGPT base model for conversational AI"
+        context_window: 1024
+        available: true
+      - name: "EleutherAI/gpt-neo-2.7B"
+        description: "GPT-Neo base model"
+        context_window: 2048
+        available: true
+    instruct_models:
+      - name: "microsoft/DialoGPT-large-instruct"
+        description: "Instruction-tuned DialoGPT"
+        context_window: 1024
+        available: false
+      - name: "HuggingFaceH4/zephyr-7b-beta"
+        description: "Zephyr 7B instruction-following model"
+        context_window: 4096
+        available: true
+    fine_tuned_models:
+      - name: "custom-fine-tuned"
+        description: "User's custom fine-tuned model"
+        context_window: 2048
+        available: false
+
+# Default Settings
+defaults:
+  max_tokens: 1000
+  temperature: 0.7
+  top_p: 1.0
+  frequency_penalty: 0.0
+  presence_penalty: 0.0
+
+# Visualization Settings
+visualization:
+  enabled: true
+  save_plots: false
+  output_directory: "./plots"
+  plot_formats: ["png", "svg"]
+  
+# Comparison Settings
+comparison:
+  include_metadata: true
+  show_token_usage: true
+  show_response_time: true
+  max_concurrent_requests: 3
